@@ -1,11 +1,18 @@
 <template>
   <div>
+    <div>test: {{ test }}</div>
     <div>IS MOBILE {{ isNativePlatform }}</div>
-    <div>Loading: <span v-if="position === null">Loading...</span></div>
+    <div>GEO ID: {{ geoId }}</div>
+    <div>
+      Loading:
+      <span v-if="position === null">Loading...</span>
+      <span v-else>Loaded</span>
+    </div>
     <div>permission {{ permission }}</div>
     <div>
       GPS position: <strong>{{ position }}</strong>
     </div>
+    <button @click="requestPermissions">requestPermissions</button>
   </div>
 </template>
 
@@ -13,6 +20,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { Geolocation, type Position } from '@capacitor/geolocation'
 import { Capacitor } from '@capacitor/core'
+
 const position = ref<Position | null>(null)
 
 function getCurrentPosition() {
@@ -27,10 +35,21 @@ let geoId: string = ''
 const permission = ref()
 const isNativePlatform = Capacitor.isNativePlatform()
 
-onMounted(async () => {
-  // if (isNativePlatform) await Geolocation.requestPermissions()
+const test = ref('')
 
-  // permission.value = await Geolocation.checkPermissions()
+const requestPermissions = async () => {
+  try {
+    permission.value = await Geolocation.requestPermissions()
+  } catch (error) {
+    test.value = error as string;
+  }
+}
+
+onMounted(async () => {
+  // if (isNativePlatform)
+  // requestPermissions()
+
+  permission.value = await Geolocation.checkPermissions()
 
   getCurrentPosition()
   // 我们开始监听
