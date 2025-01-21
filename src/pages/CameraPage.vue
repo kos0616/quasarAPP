@@ -2,7 +2,7 @@
   <div>
     <q-btn color="primary" label="Get Picture" @click="captureImage" />
 
-    <img v-if="imageSrc" :src="imageSrc" style="display: block; max-width: 100%;" />
+    <img v-if="imageSrc" :src="imageSrc" style="display: block; max-width: 100%" />
   </div>
 </template>
 
@@ -14,9 +14,14 @@ const imageSrc = ref<string | undefined>('')
 
 async function captureImage() {
   const image = await Camera.getPhoto({
-    quality: 90,
-    allowEditing: true,
+    quality: 100,
+    // editing 功能有點廢 crop區塊沒辦法移動
+    // allowEditing: true,
     resultType: CameraResultType.Uri,
+    promptLabelHeader: '好啦拍張照啦',
+    promptLabelCancel: '鼻要',
+    promptLabelPhoto: '相簿選一張',
+    promptLabelPicture: '現場拍一張',
   })
 
   //结果将因resultType选项的值而异。
