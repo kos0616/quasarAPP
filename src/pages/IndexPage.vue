@@ -1,6 +1,7 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <router-link to="/location">Go to location</router-link>
+    <router-link to="/camera">Go to Camera</router-link>
     <example-component
       title="Example component"
       active
