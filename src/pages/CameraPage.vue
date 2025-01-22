@@ -18,7 +18,7 @@ async function captureImage() {
     // editing 功能有點廢 crop區塊沒辦法移動
     // allowEditing: true,
     resultType: CameraResultType.Uri,
-    promptLabelHeader: '好啦拍張照啦',
+    promptLabelHeader: '快樂拍照囉',
     promptLabelCancel: '鼻要',
     promptLabelPhoto: '相簿選一張',
     promptLabelPicture: '現場拍一張',
