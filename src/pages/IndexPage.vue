@@ -1,7 +1,10 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <router-link to="/location">Go to location</router-link>
-    <router-link to="/camera">Go to Camera</router-link>
+    <div style="display: grid; gap: 0.5rem">
+      <router-link to="/location">Go to location</router-link>
+      <router-link to="/camera">Go to Camera</router-link>
+      <router-link to="/device">Go to Device</router-link>
+    </div>
     <example-component
       title="Example component"
       active

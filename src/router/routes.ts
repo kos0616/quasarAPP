@@ -14,6 +14,10 @@ const routes: RouteRecordRaw[] = [
         path: '/camera',
         component: () => import('pages/CameraPage.vue'),
       },
+      {
+        path: '/device',
+        component: () => import('pages/MyDevice.vue'),
+      },
     ],
   },
 
