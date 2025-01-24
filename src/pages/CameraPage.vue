@@ -1,16 +1,36 @@
 <template>
   <div>
-    <q-btn color="primary" label="Get Picture" @click="captureImage" />
-
-    <img v-if="imageSrc" :src="imageSrc" style="display: block; max-width: 100%" />
+    <div style="margin-bottom: 1rem">
+      <q-btn color="primary" label="Get Picture" @click="captureImage" />
+      <img v-if="imageSrc" :src="imageSrc" style="display: block; max-width: 100%" />
+    </div>
+    <div>
+      <q-btn color="primary" label="Scan QRcode" @click="handleScanner" />
+      <div>QR CODE: {{ qrcode }}</div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Camera, CameraResultType } from '@capacitor/camera'
+import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner'
 
 const imageSrc = ref<string | undefined>('')
+
+const qrcode = ref<string | undefined>('')
+
+const handleScanner = async () => {
+  qrcode.value = await CapacitorBarcodeScanner.scanBarcode({
+    hint: 0,
+    scanInstructions: '請對準QRcode',
+    // scanText: '掃描中...',
+    // scanButton: true,
+  }).then((result) => {
+    console.log(result.ScanResult)
+    return result.ScanResult
+  })
+}
 
 async function captureImage() {
   const image = await Camera.getPhoto({
