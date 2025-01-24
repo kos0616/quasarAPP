@@ -22,10 +22,13 @@ const qrcode = ref<string | undefined>('')
 
 const handleScanner = async () => {
   qrcode.value = await CapacitorBarcodeScanner.scanBarcode({
-    hint: 0,
+    hint: 17,
     scanInstructions: '請對準QRcode',
     // scanText: '掃描中...',
     // scanButton: true,
+    // web: {
+    //   showCameraSelection: true,
+    // },
   }).then((result) => {
     console.log(result.ScanResult)
     return result.ScanResult
